@@ -1,9 +1,11 @@
 package com.clinicadigital.sys_clinica.service;
 
+import com.clinicadigital.sys_clinica.MedicoDTO;
 import com.clinicadigital.sys_clinica.entity.Medico;
 import com.clinicadigital.sys_clinica.persintence.MedicoInterfaz;
 import com.clinicadigital.sys_clinica.persintence.MedicoInterfazCustom;
 import com.clinicadigital.sys_clinica.utils.MedicoAlreadyExistsException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -42,5 +44,52 @@ public class MedicoService {
         }
         medicoI.deleteById(id);
         return ResponseEntity.ok("Medico eliminado con exito");
+    }
+    public ResponseEntity<String> putById(Long id,Medico newMedico){
+        if(!medicoI.existsById(id)){
+            throw  new NoSuchElementException("El doctor con id " + id + " no existe");
+        }
+        Medico medico=medicoI.findById(id).get();
+        BeanUtils.copyProperties(newMedico,medico, "id"); // Excluimos el 'id' para no sobrescribirlo
+        medicoI.save(medico);
+        return ResponseEntity.ok("medico actualizado con exito");
+    }
+    public ResponseEntity<String> patchMedico(Long id, MedicoDTO medicoDto){
+        if(!medicoI.existsById(id)){
+            throw  new NoSuchElementException("El doctor con id " + id + " no existe");
+        }
+        Medico medico=medicoI.findById(id).get();
+        // Copiar solo las propiedades no nulas
+        if (medicoDto.getCredencial() != null) {
+            medico.setCredencial(medicoDto.getCredencial());
+        }
+        if (medicoDto.getEspecialidad() != null) {
+            medico.setEspecialidad(medicoDto.getEspecialidad());
+        }
+        if (medicoDto.getSueldo() != null) {
+            medico.setSueldo(medicoDto.getSueldo());
+        }
+        if (medicoDto.getNombre() != null) {
+            medico.setNombre(medicoDto.getNombre());
+        }
+        if (medicoDto.getApellido() != null) {
+            medico.setApellido(medicoDto.getApellido());
+        }
+        if (medicoDto.getDni() != 0) {  // Suponiendo que el dni no debe ser 0
+            medico.setDni(medicoDto.getDni());
+        }
+        if (medicoDto.getFecha_nac() != null) {
+            medico.setFecha_nac(medicoDto.getFecha_nac());
+        }
+        if (medicoDto.getEmail() != null) {
+            medico.setEmail(medicoDto.getEmail());
+        }
+        if (medicoDto.getTelefono() != 0) {  // Si 0 no es un valor válido para teléfono
+            medico.setTelefono(medicoDto.getTelefono());
+        }
+
+        medicoI.save(medico);
+
+        return ResponseEntity.ok("Medico actualizado con éxito");
     }
 }

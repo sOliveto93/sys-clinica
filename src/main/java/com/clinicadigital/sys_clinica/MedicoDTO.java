@@ -1,72 +1,36 @@
-package com.clinicadigital.sys_clinica.entity;
-
+package com.clinicadigital.sys_clinica;
 import jakarta.validation.constraints.*;
-import jakarta.persistence.*;
+
 import java.util.Date;
-import java.util.List;
 
-@Entity
-@Table(name = "medico")
-public class Medico {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "crendencial")
-    private String credencial;
-
-    @Column(name = "especialidad", nullable = false)
-    @NotNull(message = "La especialidad no puede ser nula")
+public class MedicoDTO {
     @Size(min = 3, max = 50, message = "La especialidad debe tener entre 3 y 50 caracteres")
     private String especialidad;
 
-    @Column(name = "sueldo", nullable = false)
-    @NotNull(message = "El sueldo no puede ser nulo")
+    @Size(min = 2, max = 50, message = "La credencial debe tener entre 2 y 50 caracteres")
+    private String credencial;
+
     @Positive(message = "El sueldo debe ser un valor positivo")
     private Double sueldo;
 
-    @Column(name = "nombre", nullable = false)
-    @NotNull(message = "El nombre no puede ser nulo")
     @Size(min = 2, max = 50, message = "El nombre debe tener entre 2 y 50 caracteres")
     private String nombre;
 
-    @Column(name = "apellido", nullable = false)
-    @NotNull(message = "El apellido no puede ser nulo")
     @Size(min = 2, max = 50, message = "El apellido debe tener entre 2 y 50 caracteres")
     private String apellido;
 
-    @Column(name = "dni", nullable = false)
-    @NotNull(message = "El DNI no puede ser nulo")
     @Min(value = 10000000, message = "El DNI debe tener al menos 8 dígitos")
     @Max(value = 99999999, message = "El DNI debe tener como máximo 8 dígitos")
-    private int dni;
+    private Integer dni;
 
-    @Column(name = "fecha_nac", nullable = false)
-    @NotNull(message = "La fecha de nacimiento no puede ser nula")
     @Past(message = "La fecha de nacimiento debe ser en el pasado")
-    @Temporal(TemporalType.DATE)
     private Date fecha_nac;
 
-    @Column(name = "email", nullable = true)
     @Email(message = "El email debe tener un formato válido")
     private String email;
 
-    @Column(name = "telefono", nullable = true)
     @Positive(message = "El teléfono debe ser un valor positivo")
-    private int telefono;
-
-    @OneToMany(mappedBy = "medico", fetch = FetchType.LAZY)
-    private List<Consulta> consulta;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public List<Consulta> getConsulta() {
-        return consulta;
-    }
+    private Integer telefono;
 
     public String getCredencial() {
         return credencial;
@@ -74,14 +38,6 @@ public class Medico {
 
     public void setCredencial(String credencial) {
         this.credencial = credencial;
-    }
-
-    public void setConsulta(List<Consulta> consulta) {
-        this.consulta = consulta;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getEspecialidad() {
@@ -116,11 +72,11 @@ public class Medico {
         this.apellido = apellido;
     }
 
-    public int getDni() {
+    public Integer getDni() {
         return dni;
     }
 
-    public void setDni(int dni) {
+    public void setDni(Integer dni) {
         this.dni = dni;
     }
 
@@ -140,11 +96,11 @@ public class Medico {
         this.email = email;
     }
 
-    public int getTelefono() {
+    public Integer getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(Integer telefono) {
         this.telefono = telefono;
     }
 }
