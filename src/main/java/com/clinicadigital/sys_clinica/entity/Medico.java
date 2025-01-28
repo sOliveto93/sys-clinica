@@ -12,8 +12,9 @@ public class Medico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "especialidad", nullable = true)
+    @Column(name = "crendencial")
+    private String credencial;
+    @Column(name = "especialidad", nullable = false)
     private String especialidad;
     @Column(name = "sueldo", nullable = false)
     private Double sueldo;
@@ -24,6 +25,7 @@ public class Medico {
     @Column(name = "dni", nullable = false)
     private int dni;
     @Column(name = "fecha_nac", nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date fecha_nac;
     @Column(name = "email", nullable = true)
     private String email;
@@ -38,6 +40,14 @@ public class Medico {
 
     public List<Consulta> getConsulta() {
         return consulta;
+    }
+
+    public String getCredencial() {
+        return credencial;
+    }
+
+    public void setCredencial(String credencial) {
+        this.credencial = credencial;
     }
 
     public void setConsulta(List<Consulta> consulta) {

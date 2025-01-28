@@ -20,6 +20,7 @@ public class Paciente {
     @Column(name="dni",nullable = false)
     private int dni;
     @Column(name="fecha_nac",nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date fecha_nac;
     @Column(name="email",nullable = true)
     private String email;

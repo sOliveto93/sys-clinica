@@ -1,6 +1,9 @@
 package com.clinicadigital.sys_clinica.entity;
 
 import jakarta.persistence.*;
+
+import java.util.Date;
+
 @Entity
 @Table(name = "pago")
 public class Pago {
@@ -18,6 +21,9 @@ public class Pago {
     private boolean descuento;
     @Column(name = "total", nullable = false)
     private double total;
+    @Column(name = "fecha_pago")
+    @Temporal(TemporalType.DATE)
+    private Date fechapago;
     @ManyToOne
     @JoinColumn(name = "paciente_id", nullable = false)
     private Paciente paciente;
@@ -29,6 +35,14 @@ public class Pago {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Date getFechapago() {
+        return fechapago;
+    }
+
+    public void setFechapago(Date fechapago) {
+        this.fechapago = fechapago;
     }
 
     public boolean isDescuento() {
