@@ -1,4 +1,4 @@
-package com.clinicadigital.sys_clinica;
+package com.clinicadigital.sys_clinica.Dto;
 import jakarta.validation.constraints.*;
 
 import java.util.Date;

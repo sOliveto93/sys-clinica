@@ -43,5 +43,11 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage.toString());
     }
+    @ExceptionHandler(EntityAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponseCustom> handlePacienteAlreadyExistsException(EntityAlreadyExistsException ex) {
+        ErrorResponseCustom errorResponse = new ErrorResponseCustom(ex.getMessage(), "ENTITY_DUPLICATE");
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
+
 
 }

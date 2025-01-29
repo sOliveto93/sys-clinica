@@ -1,10 +1,9 @@
 package com.clinicadigital.sys_clinica.service;
 
-import com.clinicadigital.sys_clinica.MedicoDTO;
+import com.clinicadigital.sys_clinica.Dto.MedicoDTO;
 import com.clinicadigital.sys_clinica.entity.Medico;
-import com.clinicadigital.sys_clinica.persintence.MedicoInterfaz;
-import com.clinicadigital.sys_clinica.persintence.MedicoInterfazCustom;
-import com.clinicadigital.sys_clinica.utils.MedicoAlreadyExistsException;
+import com.clinicadigital.sys_clinica.persintence.medico.MedicoInterfaz;
+import com.clinicadigital.sys_clinica.utils.EntityAlreadyExistsException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 public class MedicoService {
@@ -32,7 +30,7 @@ public class MedicoService {
         if (medico.getCredencial().trim().isEmpty()) {
             throw new IllegalArgumentException("credencial del medico esta vacia");
         } else if (medicoI.existsByCredencial(medico.getCredencial())) {
-            throw new MedicoAlreadyExistsException("El medico con la credencia " + medico.getCredencial() + " ya existe");
+            throw new EntityAlreadyExistsException("El medico con la credencia " + medico.getCredencial() + " ya existe");
         }
         medicoI.save(medico);
         return ResponseEntity.ok("Medico creado con exito");

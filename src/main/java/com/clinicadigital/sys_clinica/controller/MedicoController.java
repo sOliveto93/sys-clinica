@@ -1,20 +1,14 @@
 package com.clinicadigital.sys_clinica.controller;
 
-import com.clinicadigital.sys_clinica.MedicoDTO;
+import com.clinicadigital.sys_clinica.Dto.MedicoDTO;
 import com.clinicadigital.sys_clinica.entity.Medico;
-import com.clinicadigital.sys_clinica.persintence.MedicoInterfaz;
 import com.clinicadigital.sys_clinica.service.MedicoService;
-import com.clinicadigital.sys_clinica.utils.ErrorResponseCustom;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/medico")

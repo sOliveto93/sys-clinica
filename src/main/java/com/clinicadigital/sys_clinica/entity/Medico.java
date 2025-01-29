@@ -14,6 +14,8 @@ public class Medico {
     private Long id;
 
     @Column(name = "crendencial")
+    @NotNull(message = "La credencial no puede ser nula")
+    @Size(min = 3, max = 50, message = "La credencial debe tener entre 3 y 50 caracteres")
     private String credencial;
 
     @Column(name = "especialidad", nullable = false)
@@ -43,9 +45,9 @@ public class Medico {
     private int dni;
 
     @Column(name = "fecha_nac", nullable = false)
+    @Temporal(TemporalType.DATE)
     @NotNull(message = "La fecha de nacimiento no puede ser nula")
     @Past(message = "La fecha de nacimiento debe ser en el pasado")
-    @Temporal(TemporalType.DATE)
     private Date fecha_nac;
 
     @Column(name = "email", nullable = true)
