@@ -33,7 +33,7 @@ public class ServicioService {
         servicioI.save(servicio);
     }
 
-    public void putServico(Long id,Servicio newServicio){
+    public void putById(Long id,Servicio newServicio){
         if(!servicioI.existsById(id)){
             throw new NoSuchElementException("Servicio con ID " + id + " no encontrado");
         }
@@ -41,7 +41,7 @@ public class ServicioService {
         BeanUtils.copyProperties(newServicio,servicio, "id");
         servicioI.save(servicio);
     }
-    public void patchServicio(Long id,ServicioDto dto){
+    public void patchById(Long id,ServicioDto dto){
         if(!servicioI.existsById(id)){
             throw new NoSuchElementException("Servicio con ID " + id + " no encontrado");
         }

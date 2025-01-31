@@ -52,7 +52,7 @@ public class MedicoService {
         medicoI.save(medico);
         return ResponseEntity.ok("medico actualizado con exito");
     }
-    public ResponseEntity<String> patchMedico(Long id, MedicoDTO medicoDto){
+    public ResponseEntity<String> patchById(Long id, MedicoDTO medicoDto){
         if(!medicoI.existsById(id)){
             throw  new NoSuchElementException("El doctor con id " + id + " no existe");
         }

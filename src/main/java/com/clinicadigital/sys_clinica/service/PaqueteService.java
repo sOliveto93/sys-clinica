@@ -32,7 +32,7 @@ public class PaqueteService {
         paqueteI.deleteById(id);
     }
 
-    public void patchPaquete(Long id, Paquete newPaquete) {
+    public void putById(Long id, Paquete newPaquete) {
         if (!paqueteI.existsById(id)) {
             throw new NoSuchElementException("El paquete con el id " + id + " no existe");
         }
@@ -41,7 +41,7 @@ public class PaqueteService {
         paqueteI.save(paquete);
     }
 
-    public void putPaquete(Long id, PaqueteDto dto) {
+    public void patchById(Long id, PaqueteDto dto) {
         if (!paqueteI.existsById(id)) {
             throw new NoSuchElementException("El paquete con el id " + id + " no existe");
         }
